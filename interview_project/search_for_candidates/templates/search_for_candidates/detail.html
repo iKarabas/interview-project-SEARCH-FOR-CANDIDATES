@@ -1,0 +1,280 @@
+<!-- <a href="{% url 'search_for_candidates:all_candidates' %}"> home </a>
+<h1>{{ candidate.candidate_name }}</h1>
+<a href="//{{candidate.candidate_url}}" target="_blank"> {{candidate.candidate_url}} </a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+        integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+</head>
+
+<body>
+
+
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <div class="row justify-content-start">
+                <div class="col-6" style="padding-left: 50px;">
+                    <a href="{% url 'search_for_candidates:all_candidates' %}">
+                        <div class="btn btn-info"> All Candidates</div>
+                    </a>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-4">
+            <div class="row justify-content-end">
+                <div class="col-3 'search_for_candidates:search' %}">
+                    <a href="{% url 'search_for_candidates:delete_candidate' candidate.id %}">
+                        <div class="btn btn-danger"> Delete </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <img src="{{candidate.candidate_avatar_url}}" height="150px" width="150px"
+                                    alt="profile-image">
+                                <div class="w-100 ms-3" style="padding-left: 20px;">
+                                    <h4 class="my-0" style="padding-bottom:15px ;">{{candidate.candidate_username}}</h4>
+                                    <a href="mailto: abc@example.com"><button type="button"
+                                            class="btn btn-primary  ">Message</button></a>
+                                    <button type="button" class="btn btn-success  ">save</button>
+
+
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <h4 class="font-13 text-uppercase">About Me :</h4>
+                                <p class="text-muted font-13 mb-3">
+                                    {{candidate.candidate_bio}}
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span
+                                        class="ms-2">{{candidate.candidate_name}}</span></p>
+
+                                <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2"></span>
+                                </p>
+
+                                <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
+                                        class="ms-2">{{candidate.candidate_email}}</span></p>
+
+                                <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ms-2">
+                                        {{candidate.candidate_location}}</span>
+                                </p>
+
+                                <p class="text-muted mb-1 font-13"><strong>Join Date :</strong> <span class="ms-2">
+                                        {{candidate.candidate_join_date}}</span>
+                                </p>
+                                <p class="text-muted mb-1 font-13"><strong>Blog :</strong> <a
+                                        href="{{candidate.candidate_blog_url}}">
+                                        {{candidate.candidate_blog_url}}</a>
+                                </p>
+                                <p class="text-muted mb-1 font-13"><strong>Company :</strong> <span class="ms-2">
+                                        {{candidate.candidate_company}}</span>
+                                </p>
+                            </div>
+
+                            <ul class="social-list list-inline mt-3 mb-0">
+                                <li class="list-inline-item">
+                                    <a href="{{candidate.candidate_url}}"
+                                        class="social-list-item text-center border-secondary text-secondary"><i
+                                            class="mdi mdi-github"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="row">
+                                    <div class="col-4 border-end border-light">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Repositories</h5>
+                                        <h2 class="mb-0 fw-bold">{{candidate.candidate_repo_number}}</h2>
+                                    </div>
+                                    <div class="col-4 border-end border-light">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Followers</h5>
+                                        <h2 class="mb-0 fw-bold">{{candidate.candidate_follower_number}}</h2>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Following</h5>
+                                        <h2 class="mb-0 fw-bold">{{ candidate.candidate_following_number}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- end card -->
+
+
+
+                    {% if candidate.stackoverflow_candidate_name %}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center" style="border-bottom: 3px solid rgba(0, 0, 0, 0.399)
+                        ; margin-bottom: 10px;">
+                                <h2 class="header-title mb-3 justify-content-center">Stack Overflow</h2>
+                            </div>
+
+                            <div class="d-flex align-items-start" style="margin-top: 5px;">
+                                <img src="{{candidate.stackoverflow_candidate_avatar_url}}" height="150px" width="150px"
+                                    alt="profile-image">
+                                <div class="w-100 ms-3" style="padding-left: 20px;">
+                                    <h4 class="my-0" style="padding-bottom:15px">
+                                        {{candidate.stackoverflow_candidate_name}}</h4>
+                                    <a href="mailto: abc@example.com"><button type="button"
+                                            class="btn btn-primary  ">Message</button></a>
+                                    <button type="button" class="btn btn-success  ">save</button>
+
+
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <h4 class="font-13 text-uppercase">About Me :</h4>
+                                <p class="text-muted font-13 mb-3">
+                                    {{candidate.stackoverflow_candidate_bio}}
+                                </p>
+                                <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span
+                                        class="ms-2">{{candidate.stackoverflow_candidate_name}}</span></p>
+
+                                <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2"></span>
+                                </p>
+
+
+                                <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ms-2">
+                                        {{candidate.stackoverflow_candidate_location}}</span>
+                                </p>
+
+
+                                <p class="text-muted mb-1 font-13"><strong>Blog :</strong> <a
+                                        href="{{candidate.candidate_blog_url}}">
+                                        {{candidate.stackoverflow_candidate_blog_url}}</a>
+                                </p>
+
+                            </div>
+
+                            <ul class="social-list list-inline mt-3 mb-0">
+                                <li class="list-inline-item">
+                                    <a href="{{candidate.stackoverflow_candidate_url}}"
+                                        class="social-list-item text-center border-secondary text-secondary"><i
+                                            class="mdi mdi-stack-overflow"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="row">
+                                    <div class="col-6 border-end border-light">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Reputations</h5>
+                                        <h2 class="mb-0 fw-bold">{{candidate.stackoverflow_candidate_reputation}}</h2>
+                                    </div>
+                                    <div class="col-6 border-end border-light">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Views</h5>
+                                        <h2 class="mb-0 fw-bold">{{candidate.stackoverflow_candidate_view_count}}</h2>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 10px;">
+                                    <div class="col-4 border-end border-light">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Answers</h5>
+                                        <h2 class="mb-0 fw-bold">{{candidate.stackoverflow_candidate_answer_count}}</h2>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Questions</h5>
+                                        <h2 class="mb-0 fw-bold">{{ candidate.stackoverflow_candidate_question_count}}
+                                        </h2>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5 class="text-muted mt-1 mb-2 fw-normal">Upvotes</h5>
+                                        <h2 class="mb-0 fw-bold">{{ candidate.stackoverflow_candidate_up_vote_count}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- end card -->
+
+                    {% endif%}
+
+
+
+
+                </div> <!-- end col-->
+
+
+
+
+                <div class="col-xl-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center" style="border-bottom: 3px solid rgba(0, 0, 0, 0.399)
+                        ; margin-bottom: 10px;">
+                                <h2 class="header-title mb-3 justify-content-center">Notes about candidate</h2>
+                            </div>
+
+                            <!-- notes box -->
+                            <form action="{% url 'search_for_candidates:update_candidate_notes' candidate.id %}"
+                                method="post" class="comment-area-box mb-3">
+                                {% csrf_token %}
+                                <span class="input-icon">
+                                    <textarea rows="3" class="form-control" name="notes" ,
+                                        placeholder="You can add some notes about your candidate here">{{candidate.candidate_notes}}</textarea>
+                                </span>
+                                <div class="comment-area-btn">
+                                    <div class="float-end">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">Save
+                                            Changes </button>
+                                    </div>
+
+                                </div>
+                            </form>
+                            <!-- end comment box -->
+
+
+
+
+                        </div>
+                    </div> <!-- end card-->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block title %}<title>Search For Candidates</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #ecf2f5;">
+
+    <!-- header area start -->
+    <div class="return-button" style="padding-top: 10px; padding-left: 15px;">
+        <a href="{% url 'search_for_candidates:search' %}">
+            <div class="btn btn-info"> Search For New Candidates</div>
+        </a>
+    </div>
+    <!-- header area end -->
+
+    <!-- saved candidates display area start -->
+    <div class="d-flex flex-column">
+        <!-- title -->
+        <div class="d-flex justify-content-center">
+            <p class="font-weight-bold text-uppercase" style="font-size:40px;">Saved candidates</p>
+        </div>
+
+        <div class="container profile-page">
+            <div class="row">
+                <!-- for loop of all the saved candidates -->
+                {% if candidates_list %}
+                {% for candidate in candidates_list %}
+
+                <div class="col-xl-6 col-lg-7 col-md-12">
+                    <div class="card profile-header">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="profile-image float-md-right"> <img
+                                            src="{{candidate.candidate_avatar_url}}" alt=""> </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-12">
+                                    <h4 class="m-t-0 m-b-0"><strong>{{candidate.candidate_username}}</strong></h4>
+                                    <span class="job_post">{{candidate.candidate_name}}</span>
+                                    <p>{{candidate.candidate_bio}}</p>
+                                    <p>{{candidate.candidate_location}}</p>
+                                    <div>
+
+                                        <a href="{{candidate.candidate_url}}" class="social-link">
+                                            <div class="btn btn-dark"> <i class="fa fa-github"
+                                                    style="font-size:20px;color:white;"></i>
+                                            </div>
+                                        </a>
+
+                                        <a href="{% url 'search_for_candidates:detail' candidate.id %}">
+                                            <button class="btn btn-primary btn-round">DETAILS</button></a>
+
+                                        <a href="{% url 'search_for_candidates:delete_candidate' candidate.id %}"><button
+                                                class="btn btn-danger btn-round btn-simple">DELETE</button></a>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>You don't have any candidates</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- saved candidates display area end -->
+
+    <!-- additional scripts -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
